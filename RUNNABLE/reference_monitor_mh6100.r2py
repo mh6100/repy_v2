@@ -40,22 +40,17 @@ class ABFile():
   def writeat(self,data,offset):
     
     # Write the requested data to the B file using the sandbox's writeat call
-    
     self.Bfile.writeat(data,offset)
+
+    if self.Bfile.writeat(data, 2):
+      self.Bfile.close
+
   
   def readat(self,bytes,offset):
     # Read from the A file using the sandbox's readat...
     return self.Afile.readat(bytes,offset)
 
   def close(self):
-    f = openfile(self.Bfile, 'r')
-      if f.Read(0) == "S" && f.Read(-1) == "E":
-          with openfile(self.ABFile, 'w+') as output, openfile(self.Bfile, 'r') as input:
-            while True:
-              writefile = input.Read(10000)
-              if writefile == ' ':
-                break
-              output.Write(writefile)
      self.Afile.close()
      self.Bfile.close()
 
