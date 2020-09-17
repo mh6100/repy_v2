@@ -42,8 +42,11 @@ class ABFile():
     # Write the requested data to the B file using the sandbox's writeat call
     self.Bfile.writeat(data,offset)
 
-    if self.Bfile.writeat(data, 2):
-      self.Bfile.close
+    if offset > 0:
+      exitall()
+    if offset < 0:
+      exitall()
+    
 
   
   def readat(self,bytes,offset):
