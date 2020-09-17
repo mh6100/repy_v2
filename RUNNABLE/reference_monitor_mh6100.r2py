@@ -28,14 +28,11 @@ class ABFile():
 
     # if create = True, make the files and add 'SE' to the readat file. If anything else, exit
     if create:
-      # if Afile backup already exists in the list of files, open A & B files 
       self.Afile = openfile(self.Afn,create)
       self.Bfile = openfile(self.Bfn,create)
       self.Afile.writeat('SE',0)
     else:
         exitall()
-
-
 
 
   def writeat(self,data,offset):
@@ -48,10 +45,10 @@ class ABFile():
     # Read from the A file using the sandbox's readat...
     return self.Afile.readat(bytes,offset)
 
-  # check if file contents starts with "S" and ends with "E" on close. update the original file if Bfile is valid
+ 
   def close(self):
-
-  #create objects to use to access data within the files
+    # check if file contents starts with "S" and ends with "E" on close. update the original file if Bfile is valid
+    # create objects to use to access data within the files
     a_checkfile = self.Afile.readat(None, 0)
     b_checkfile = self.Bfile.readat(None, 0)
 
@@ -67,6 +64,8 @@ class ABFile():
       new_a_file.writeat(b_checkfile, 0)
       new_a_file.close()
 
+    if b_checkfile == ' ':
+      exitall()
     else: 
       exitall()
 
