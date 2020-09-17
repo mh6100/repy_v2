@@ -32,9 +32,7 @@ class ABFile():
     if create:
       self.Afile = openfile(self.Afn,create)
       self.Bfile = openfile(self.Bfn,create)
-    elif self.Afile.writeat('SE',0) != self.Afile.writeat('SE',0):
-      exitall()
-      #self.Afile.writeat('SE',0)
+      self.Afile.writeat('SE',0)
     # if create = false
     else:
         exitall()
