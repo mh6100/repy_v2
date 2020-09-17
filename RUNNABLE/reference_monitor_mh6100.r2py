@@ -17,6 +17,7 @@ TARGET="target"
 FUNC="func"
 OBJC="objc"
 
+# creates ABFile class and Afn/Bfn objects of the class 
 class ABFile():
   def __init__(self,filename,create):
     # globals
@@ -25,7 +26,7 @@ class ABFile():
     self.Afn = filename+'.a'
     self.Bfn = filename+'.b'
 
-    # make the files and add 'SE' to the readat file...
+    # if create = True, make the files and add 'SE' to the readat file. If anything else, exit
     if create:
       self.Afile = openfile(self.Afn,create)
       self.Bfile = openfile(self.Bfn,create)
@@ -33,9 +34,13 @@ class ABFile():
     else:
         exitall()
 
+
+
+
   def writeat(self,data,offset):
     
     # Write the requested data to the B file using the sandbox's writeat call
+    
     self.Bfile.writeat(data,offset)
   
   def readat(self,bytes,offset):
@@ -43,8 +48,16 @@ class ABFile():
     return self.Afile.readat(bytes,offset)
 
   def close(self):
-    self.Afile.close()
-    self.Bfile.close()
+    f = openfile(self.Bfile, 'r')
+      if f.Read(0) == "S" && f.Read(-1) == "E":
+          with openfile(self.ABFile, 'w+') as output, openfile(self.Bfile, 'r') as input:
+            while True:
+              writefile = input.Read(10000)
+              if writefile == ' ':
+                break
+              output.Write(writefile)
+     self.Afile.close()
+     self.Bfile.close()
 
 
 def ABopenfile(filename, create):
