@@ -55,20 +55,20 @@ class ABFile():
     self.Afile.close()
     self.Bfile.close()
 
-    if ((b_checkfile[0] == a_checkfile[0]) and (b_checkfile[len(b_checkfile)-1] == a_checkfile[len(a_checkfile)-1])):
-      # replace contents in Afile with those of Bfile
-      # remove contents of A (backup Afile is still available)
-      removefile(self.Afn)
-      new_a_file = openfile(self.Afn, True)
-      # add the data from Bfile to new file name
-      new_a_file.writeat(b_checkfile, 0)
-    
-     # openfile(self.Afn, True).writeat(b_checkfile, 0)
- 
-      new_a_file.close()
+    if b_checkfile == ' ':
+      exitall()
+      if ((b_checkfile[0] == a_checkfile[0]) and (b_checkfile[len(b_checkfile)-1] == a_checkfile[len(a_checkfile)-1])):
+        # replace contents in Afile with those of Bfile
+        # remove contents of A (backup Afile is still available)
+        removefile(self.Afn)
+        new_a_file = openfile(self.Afn, True)
+        # add the data from Bfile to new file name
+        new_a_file.writeat(b_checkfile, 0)
+      
+      # openfile(self.Afn, True).writeat(b_checkfile, 0)
+  
+        new_a_file.close()
 
-      if b_checkfile == ' ':
-        exitall()
     else: 
       exitall()
 
