@@ -1,4 +1,10 @@
 """
+# mh6100
+# Reference monitor - Part 1
+#
+# This program checks if a file starts with 'S' and ends wit 'E' when close() is called.
+# If the new file is valid, the orignial is updated to the newest file content.
+
 This security layer inadequately handles A/B storage for files in RepyV2.
 
 
@@ -55,8 +61,8 @@ class ABFile():
     self.Afile.close()
     self.Bfile.close()
 
-    if b_checkfile == ' ':
-      exitall()
+    if b_checkfile != ' ':
+      
       if ((b_checkfile[0] == a_checkfile[0]) and (b_checkfile[len(b_checkfile)-1] == a_checkfile[len(a_checkfile)-1])):
         # replace contents in Afile with those of Bfile
         # remove contents of A (backup Afile is still available)
@@ -68,7 +74,6 @@ class ABFile():
       # openfile(self.Afn, True).writeat(b_checkfile, 0)
   
         new_a_file.close()
-
     else: 
       exitall()
 
