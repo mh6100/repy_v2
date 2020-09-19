@@ -1,9 +1,9 @@
 """
-# mh6100
-# Reference monitor - Part 1
-#
-# This program checks if a file starts with 'S' and ends wit 'E' when close() is called.
-# If the new file is valid, the orignial is updated to the newest file content.
+ mh6100
+ Reference monitor - Part 1
+
+ This program checks if a file starts with 'S' and ends wit 'E' when close() is called.
+ If the new file is valid, the orignial is updated to the newest file content.
 
 This security layer inadequately handles A/B storage for files in RepyV2.
 
