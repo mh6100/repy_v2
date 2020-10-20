@@ -5,11 +5,16 @@ if "testfile.txt.b" in listfiles():
 
 myfile=ABopenfile("testfile.txt",True)  #Create an AB file
 
-
-
-
-# put INVALID data in the file.
+# Put INVALID data in the file
 myfile.writeat("asdfghjkl",0)
 
-#Close the file
+# Close the file
+myfile.close()
+
+# Open the file
+myfile=ABopenfile("testfile.txt",True)
+
+# Assert that the number of bytes is 2 and that they are "SE"
+assert("SE" == myfile.readat(2,0))
+# Reclose file
 myfile.close()
