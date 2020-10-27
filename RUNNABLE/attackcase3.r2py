@@ -4,16 +4,11 @@ if "testfile.txt.b" in listfiles():
   removefile("testfile.txt.b")
 myfile=ABopenfile("testfile.txt",True)  #Create an AB file
 
-# truncate B file so that only the first two bytes are read
-myfile.truncate(2)
-myfile.writeat("asdfghjkl", 0)
-myfile.close()
-
-
-
+# I should get 'SE' when reading an empty file...
 assert('SE' == myfile.readat(None,0))
 
-
+# put some valid data in the file.
+myfile.writeat("Stest12345E",100)
 
 # I should still get 'SE' because the file wasn't closed.
 assert('SE' == myfile.readat(None,0))
