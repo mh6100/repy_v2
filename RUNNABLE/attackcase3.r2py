@@ -1,0 +1,22 @@
+if "testfile.txt.a" in listfiles():
+  removefile("testfile.txt.a")
+if "testfile.txt.b" in listfiles():
+  removefile("testfile.txt.b")
+myfile=ABopenfile("testfile.txt",True)  #Create an AB file
+
+# truncate B file so that only the first two bytes are read
+myfile.truncate(2)
+myfile.writeat("asdfghjkl", 0)
+myfile.close()
+
+
+
+assert('SE' == myfile.readat(None,0))
+
+
+
+# I should still get 'SE' because the file wasn't closed.
+assert('SE' == myfile.readat(None,0))
+
+#Close the file
+myfile.close()
