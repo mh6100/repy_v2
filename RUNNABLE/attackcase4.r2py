@@ -7,10 +7,16 @@ myfile=ABopenfile("testfile.txt",True)  #Create an AB file
 # I should get 'SE' when reading an empty file...
 assert('SE' == myfile.readat(None,0))
 
+myfile.writeat("SE",0)
+myfile.length = 2
+log(myfile.length)
+
 # put some valid data in the file.
-myfile.writeat("Stest12345E",0) #11 bytes in file
-# read past the max number of bytes 
-myfile.readat(12,0)
+myfile.writeat("ftest1234SE",0) #11 bytes in file
+
+
+# I should still get 'SE' because the file wasn't closed.
+assert('SE' == myfile.readat(None,0))
 
 #Close the file
 myfile.close()
