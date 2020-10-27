@@ -8,7 +8,7 @@ myfile=ABopenfile("testfile.txt",True)  #Create an AB file
 assert('SE' == myfile.readat(None,0))
 
 myfile.length = 2
-log(myfile.length)
+
 
 # put some valid data in the file.
 myfile.writeat("ftest1234SE",0) #11 bytes in file
