@@ -58,7 +58,9 @@ class ABFile():
   def writeat(self,data,offset):
     
     # Write the requested data to the B file using the sandbox's writeat call
-    self.Bfile.writeat(data,offset)
+    # check theh absolute offset for values greater than offset 
+    if offset < len(self.Bfile.writeat(data, offset)):
+      self.Bfile.writeat(data,offset)
 
   
   def readat(self,bytes,offset):
