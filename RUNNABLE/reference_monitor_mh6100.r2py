@@ -42,10 +42,10 @@ class ABFile():
     # if create = False || no files exist, create and write "SE"
     else: 
       # files exist
-      if((self.Afn in listfiles()) and (self.Bfn in listfiles()):
-        self.Afile = openfile(self.Afn,create)
-        self.Bfile = openfile(self.Bfn,create)
-        self.Bfile.writeat(self.Afile.readat(None,0),0)
+      if (self.Afn in listfiles()) and (self.Bfn in listfiles()):
+          self.Afile = openfile(self.Afn,create)
+          self.Bfile = openfile(self.Bfn,create)
+          self.Bfile.writeat(self.Afile.readat(None,0),0)
      
       # files don't exist
       else:
