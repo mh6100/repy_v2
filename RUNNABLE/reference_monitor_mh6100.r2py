@@ -86,6 +86,8 @@ class ABFile():
 
         mycontext['lock'].release()  
 
+    else: 
+        mycontext['lock'].release()
 
 
 
