@@ -56,12 +56,16 @@ class ABFile():
 
         
   def writeat(self,data,offset):
-    
+  # create a lock obj and block file until lock is available
+    self.Bfile.lock = createlock()
+    self.Bfile.lock.acquire(True)
     # Write the requested data to the B file using the sandbox's writeat call
     # check theh absolute offset for values greater than offset 
-    writeOffsetVal = self.Afile.readat(None,0)
+    writeOffsetVal = self.Bfile.readat(None,0)
     if ((0 <= offset) and (offset <= len(writeOffsetVal))):
       self.Bfile.writeat(data, offset)
+    # releases lock
+    self.Bfile.lock.release
 
   
   def readat(self,bytes,offset):
@@ -90,9 +94,9 @@ class ABFile():
       
       # openfile(self.Afn, True).writeat(b_checkfile, 0)
   
-        new_a_file.close()
-   # else: 
-    #  exitall()
+        new_a_file.close()    
+    else: 
+      exitall()
 
 
 
