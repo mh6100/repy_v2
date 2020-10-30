@@ -24,8 +24,9 @@ OBJC="objc"
 # creates ABFile class and Afn/Bfn objects of the class 
 class ABFile():
   def __init__(self,filename,create):
-    # globals
+    # global debug and lock
     mycontext['debug'] = False   
+    mycontext['lock'] = createlock()
 
     # local (per object) reference to the underlying file
     self.Afn = filename+'.a'
@@ -33,12 +34,14 @@ class ABFile():
 
     # if create = True, make the files and add 'SE' to the readat file.
     if create:
+        mycontext['lock'].acquire(True)
         self.Afile = openfile(self.Afn,create)
         self.Bfile = openfile(self.Bfn,create)
         self.Afile.writeat('SE',0)
 
     # if create = False || no files exist, create and write "SE"
-    else: 
+    else:
+      mycontext['lock'].acquire(True)     
       # files exist
       if (self.Afn in listfiles()) and (self.Bfn in listfiles()):
           self.Afile = openfile(self.Afn,create)
@@ -52,16 +55,11 @@ class ABFile():
         self.Afile.writeat('SE',0)
      
   def writeat(self,data,offset):
-  # create a lock obj and block file until lock is available
-    self.Bfile.lock = createlock()
-    self.Bfile.lock.acquire(True)
     # Write the requested data to the B file using the sandbox's writeat call
     # check theh absolute offset for values greater than offset 
     writeOffsetVal = self.Bfile.readat(None,0)
     if ((0 <= offset) and (offset <= len(writeOffsetVal))):
       self.Bfile.writeat(data, offset)
-    # releases lock
-    self.Bfile.lock.release
 
   def readat(self,bytes,offset):
     # Read from the A file using the sandbox's readat...
@@ -83,7 +81,9 @@ class ABFile():
       # add the data from Bfile to new file name
       new_a_file.writeat(b_checkfile, 0)
 
-      new_a_file.close()    
+      new_a_file.close()
+
+      mycontext['lock'].release()  
 
 
 
