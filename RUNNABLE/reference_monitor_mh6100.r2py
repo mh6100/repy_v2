@@ -64,7 +64,7 @@ class ABFile():
       try: 
         self.Bfile.writeat(data, offset)
       except Exception:
-      #  log("do nothing")
+        null
 
 
 
