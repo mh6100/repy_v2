@@ -44,8 +44,7 @@ class ABFile():
       mycontext['lock'].acquire(True)     
       # files exist
       if self.Afn in listfiles():
-          self.Afile = openfile(self.Afn,create)
-          self.Bfile = openfile(self.Bfn,create)
+          self.Bfile.writeat(self.Afile.readat(None,0),0)
      
       # files don't exist
       else:
