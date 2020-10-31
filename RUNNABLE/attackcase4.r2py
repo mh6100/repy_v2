@@ -7,11 +7,9 @@ myfile=ABopenfile("testfile.txt",True)  #Create an AB file
 # I should get 'SE' when reading an empty file...
 assert('SE' == myfile.readat(None,0))
 
-myfile.length = 2
-
-
 # put some valid data in the file.
-myfile.writeat("ftest1234SE",0) #11 bytes in file
+myfile.writeat("StE",0)
+myfile.readat(3,3)
 
 
 # I should still get 'SE' because the file wasn't closed.
