@@ -40,7 +40,7 @@ class ABFile():
         self.Afile.writeat('SE',0)
         self.Bfile.writeat(self.Afile.readat(None,0),0)
 
-    # if create = False || no files exist, create and write "SE"
+    # if create = False, create and write "SE"
     else:
       mycontext['lock'].acquire(True)     
       # files exist
@@ -48,14 +48,7 @@ class ABFile():
           self.Afile = openfile(self.Afn,create)
           self.Bfile = openfile(self.Bfn,create)
           self.Bfile.writeat(self.Afile.readat(None,0),0)
-     
-      # files don't exist
-      else:
-        self.Afile = openfile(self.Afn,create)
-        self.Bfile = openfile(self.Bfn,create)
-        self.Afile.writeat('SE',0)
-        self.Bfile.writeat(self.Afile.readat(None,0),0)     
-
+        
   def writeat(self,data,offset):
     # Write the requested data to the B file using the sandbox's writeat call
     # check theh absolute offset for values greater than offset 
@@ -63,10 +56,9 @@ class ABFile():
     if ((0 <= offset) and (offset <= len(writeOffsetVal))):
       try: 
         self.Bfile.writeat(data, offset)
+      
       except Exception:
-        null
-
-
+        pass
 
   def readat(self,bytes,offset):
     # Read from the A file using the sandbox's readat...
