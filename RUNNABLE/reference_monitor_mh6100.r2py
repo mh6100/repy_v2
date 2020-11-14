@@ -72,7 +72,7 @@ class ABFile():
     self.Afile.close()
     self.Bfile.close()
  
-    if b_checkfile != ' ':
+    if len(b_checkfile) > 1:
       if ((b_checkfile[0] == a_checkfile[0]) and (b_checkfile[len(b_checkfile)-1] == a_checkfile[len(a_checkfile)-1])):
         # replace contents in Afile with those of Bfile
         # remove contents of A (backup Afile is still available)
