@@ -54,11 +54,11 @@ class ABFile():
     # check theh absolute offset for values greater than offset 
     # writeOffsetVal = self.Bfile.readat(None,0)
     #if ((0 <= offset) and (offset <= len(writeOffsetVal))):
-      try: 
-        self.Bfile.writeat(data, offset)
+    try: 
+      self.Bfile.writeat(data, offset)
       
-      except Exception:
-        pass
+    except Exception:
+      pass
 
   def readat(self,bytes,offset):
     # Read from the A file using the sandbox's readat...
