@@ -33,12 +33,23 @@ class ABFile():
     self.Bfn = filename+'.b'
 
     # if create = True, make the files and add 'SE' to the readat file.
+    if self.Afn not in listfiles():
+      create_Afn = True
+    else:
+      create_Afn = False
+    if self.Bfn not in listfiles():
+      create_Bfn = True
+    else: 
+      create_Bfn = False
+    
     if create:
         mycontext['lock'].acquire(True)
         self.Afile = openfile(self.Afn,create)
         self.Bfile = openfile(self.Bfn,create)
-        self.Afile.writeat('SE',0)
-        self.Bfile.writeat(self.Afile.readat(None,0),0)
+        if create_Afn:
+          self.Afile.writeat('SE',0)
+        if create_Bfn:
+          self.Bfile.writeat(self.Afile.readat(None,0),0)
 
     # if create = False, create and write "SE"
     else:
