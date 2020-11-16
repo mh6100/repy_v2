@@ -26,8 +26,7 @@ mycontext['lock'] = createlock()
 class ABFile():
   def __init__(self,filename,create):
     # global debug and lock
-    mycontext['debug'] = False   
-    
+    mycontext['debug'] = False 
 
     # local (per object) reference to the underlying file
     self.Afn = filename+'.a'
