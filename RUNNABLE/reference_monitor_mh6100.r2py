@@ -21,12 +21,13 @@ TARGET="target"
 FUNC="func"
 OBJC="objc"
 
+mycontext['lock'] = createlock()
 # creates ABFile class and Afn/Bfn objects of the class 
 class ABFile():
   def __init__(self,filename,create):
     # global debug and lock
     mycontext['debug'] = False   
-    mycontext['lock'] = createlock()
+    
 
     # local (per object) reference to the underlying file
     self.Afn = filename+'.a'
